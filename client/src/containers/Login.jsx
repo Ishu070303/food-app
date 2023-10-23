@@ -38,13 +38,14 @@ const Login = () => {
         alt='' 
         />
 
+         {/* Top logo sections */}
+            <div className='flex items-center justify-start gap-4 w-23 absolute left-4 top-4'>
+              <img src={Logo} className='w-8' alt='logo' />
+              <p className='text-headingColor font-semibold text-2xl'>MASTI</p>
+            </div>
+
         {/* content box */}
         <motion.div className={`flex flex-col items-center w-[65%] md:w-508 ${isSignUp ? "h-[80%]" : "h-[70%]"} absolute ${isSignUp? "top-[4.5rem]" : "top-[6.5rem]"} right-[6.5rem] px-2 py-8 gap-3 border-2 rounded-2xl shadow-xl`}>
-            {/* Top logo sections */}
-            {/* <div className='flex items-center justify-start gap-4 w-full'>
-              <img src={Logo} className='w-8' alt='logo' />
-              <p className='text-headingColor font-semibold text-2xl'>Foodie</p>
-            </div> */}
 
             {/* Welcome text */}
             <p className='text-3xl font-semibold text-headingColor'> Welcome </p>
