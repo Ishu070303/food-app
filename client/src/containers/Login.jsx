@@ -34,12 +34,12 @@ const Login = () => {
     <div className='w-screen h-screen relative overflow-hidden flex'>
         {/* background color */}
         <img 
-        src={LoginBg} className='w-[50vw] h-full object-cover absolute top-0 left-0 bg-blue-500' 
+        src={LoginBg} className='w-[50vw] h-full object-cover absolute top-0 left-0' 
         alt='' 
         />
 
         {/* content box */}
-        <div className={`flex flex-col items-center w-[65%] md:w-508 ${isSignUp ? "h-[80%]" : "h-[70%]"} absolute ${isSignUp? "top-[4.5rem]" : "top-[6.5rem]"} right-[6.5rem] px-2 py-8 gap-3 border-2 rounded-2xl shadow-xl`}>
+        <motion.div className={`flex flex-col items-center w-[65%] md:w-508 ${isSignUp ? "h-[80%]" : "h-[70%]"} absolute ${isSignUp? "top-[4.5rem]" : "top-[6.5rem]"} right-[6.5rem] px-2 py-8 gap-3 border-2 rounded-2xl shadow-xl`}>
             {/* Top logo sections */}
             {/* <div className='flex items-center justify-start gap-4 w-full'>
               <img src={Logo} className='w-8' alt='logo' />
@@ -135,7 +135,7 @@ const Login = () => {
                 Sign in with Google 
               </p>
             </motion.div>
-        </div>
+        </motion.div>
     </div>
   )
 }
