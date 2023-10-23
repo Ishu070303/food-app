@@ -34,12 +34,12 @@ const Login = () => {
     <div className='w-screen h-screen relative overflow-hidden flex'>
         {/* background color */}
         <img 
-        src={LoginBg} className='w-[50vw] h-full object-cover absolute top-0 left-0' 
+        src={LoginBg} className='w-[50vw] h-full object-cover absolute top-0 left-0 bg-blue-500' 
         alt='' 
         />
 
         {/* content box */}
-        <div className='flex flex-col items-center bg-lightOverlay w-[75%] md:w-508 h-[70%] absolute top-[6.5rem] right-[6.5rem] px-4 py-8 gap-3 border-2 rounded-2xl shadow-xl'>
+        <div className={`flex flex-col items-center w-[65%] md:w-508 ${isSignUp ? "h-[80%]" : "h-[70%]"} absolute ${isSignUp? "top-[4.5rem]" : "top-[6.5rem]"} right-[6.5rem] px-2 py-8 gap-3 border-2 rounded-2xl shadow-xl`}>
             {/* Top logo sections */}
             {/* <div className='flex items-center justify-start gap-4 w-full'>
               <img src={Logo} className='w-8' alt='logo' />
@@ -54,7 +54,7 @@ const Login = () => {
             <div className='w-full flex flex-col items-center justify-center gap-6 px-4 md:px-12 py-4'>
               <LoginInput 
               placeholder={"Email Here"} 
-              icon={<FaEnvelope className='text-xl text-red-400' />} 
+              icon={<FaEnvelope className='text-xl text-black' />} 
               inputState={userEmail}
               inputStateFunc={setUserEmail} 
               type="email" 
@@ -63,7 +63,7 @@ const Login = () => {
 
               <LoginInput 
               placeholder={"Password Here"} 
-              icon={<FaLock className='text-xl text-red-400' />} 
+              icon={<FaLock className='text-xl text-black' />} 
               inputState={password}
               inputStateFunc={setPassword} 
               type="password" 
@@ -72,7 +72,7 @@ const Login = () => {
 
             { isSignUp && (  <LoginInput 
               placeholder={"Confirm Password Here"} 
-              icon={<FaLock className='text-xl text-red-400' />} 
+              icon={<FaLock className='text-xl text-black' />} 
               inputState={confirm_password}
               inputStateFunc={setConfirm_password} 
               type="password" 
@@ -84,7 +84,7 @@ const Login = () => {
               Doesn't have an account? {" "}
               <motion.button 
               {...buttonClick} 
-              className='text-red-400 cursor-pointer bg-transparent'
+              className='text-blue-400 cursor-pointer bg-transparent'
               onClick={() => setIsSignUp(true)}
               >
                 Create One
@@ -95,7 +95,7 @@ const Login = () => {
               Already have an account? {" "}
               <motion.button 
               {...buttonClick} 
-              className='text-red-400 cursor-pointer bg-transparent'
+              className='text-blue-400 cursor-pointer bg-transparent'
               onClick={() => setIsSignUp(false)}
               >
                 Sign-in here
@@ -106,13 +106,13 @@ const Login = () => {
             {/* Button section */}
             { isSignUp ? (
               <motion.button {...buttonClick} 
-              className='w-full px-4 py-2 rounded-md bg-red-400 cursor-pointer text-white text-xl capitalize hover:bg-red-500 transition-all duration-150'
+              className='w-full px-4 py-2 rounded-md bg-blue-400 cursor-pointer text-white text-xl capitalize hover:bg-blue-500 transition-all duration-150'
               >
                 Sign Up
               </motion.button>
             ): (
             <motion.button {...buttonClick} 
-            className='w-full px-4 py-2 rounded-md bg-red-400 cursor-pointer text-white text-xl capitalize hover:bg-red-500 transition-all duration-150'
+            className='w-full px-4 py-2 rounded-md bg-blue-400 cursor-pointer text-white text-xl capitalize hover:bg-blue-500 transition-all duration-150'
             >
               Sign In
             </motion.button>

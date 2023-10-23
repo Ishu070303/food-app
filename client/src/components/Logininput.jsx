@@ -17,8 +17,8 @@ const Logininput = ({
   return (
     <motion.div 
     {...fadeInOut}
-    className={`flex items-center justify-center gap-4 bg-lightOverlay backdrop-blur-md rounded-md w-full px-4 py-2 border border-red-400
-    ${isFocus ? "shadow-md shadow-red-400" : "shadow-none"}`
+    className={`flex items-center justify-center gap-4 bg-lightOverlay backdrop-blur-md rounded-md w-full px-4 py-2 border border-black
+    ${isFocus ? "shadow-md shadow-blue-200" : "shadow-none"}`
     }>
         {icon}
         <input 

@@ -22,3 +22,7 @@ app.use(( req, res, next) => {
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
 });
+
+//ap endpoints 
+
+exports.app = functions.https.onRequest(app);
