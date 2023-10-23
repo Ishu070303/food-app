@@ -34,27 +34,27 @@ const Login = () => {
     <div className='w-screen h-screen relative overflow-hidden flex'>
         {/* background color */}
         <img 
-        src={LoginBg} className='w-full h-full object-cover absolute top-0 left-0' 
+        src={LoginBg} className='w-[50vw] h-full object-cover absolute top-0 left-0' 
         alt='' 
         />
 
         {/* content box */}
-        <div className='flex flex-col items-center bg-lightOverlay w-[80%] md:w-508 h-full z-10 backdrop-blur-md absolute right-0 p-4 px-4 py-12 gap-6'>
+        <div className='flex flex-col items-center bg-lightOverlay w-[75%] md:w-508 h-[70%] absolute top-[6.5rem] right-[6.5rem] px-4 py-8 gap-3 border-2 rounded-2xl shadow-xl'>
             {/* Top logo sections */}
-            <div className='flex items-center justify-start gap-4 w-full'>
+            {/* <div className='flex items-center justify-start gap-4 w-full'>
               <img src={Logo} className='w-8' alt='logo' />
               <p className='text-headingColor font-semibold text-2xl'>Foodie</p>
-            </div>
+            </div> */}
 
             {/* Welcome text */}
-            <p className='text-3xl font-semibold text-headingColor'> Welcome Back </p>
-            <p className='text-xl text-textColor -mt-6'>{isSignUp ? "Sign Up": "Sign In"} with following</p>
+            <p className='text-3xl font-semibold text-headingColor'> Welcome </p>
+            <p className='text-xl text-textColor -mt-3'>{isSignUp ? "Sign Up": "Sign In"} </p>
 
             {/* input section */}
             <div className='w-full flex flex-col items-center justify-center gap-6 px-4 md:px-12 py-4'>
               <LoginInput 
               placeholder={"Email Here"} 
-              icon={<FaEnvelope className='text-xl text-textColor' />} 
+              icon={<FaEnvelope className='text-xl text-red-400' />} 
               inputState={userEmail}
               inputStateFunc={setUserEmail} 
               type="email" 
@@ -63,7 +63,7 @@ const Login = () => {
 
               <LoginInput 
               placeholder={"Password Here"} 
-              icon={<FaLock className='text-xl text-textColor' />} 
+              icon={<FaLock className='text-xl text-red-400' />} 
               inputState={password}
               inputStateFunc={setPassword} 
               type="password" 
@@ -72,7 +72,7 @@ const Login = () => {
 
             { isSignUp && (  <LoginInput 
               placeholder={"Confirm Password Here"} 
-              icon={<FaLock className='text-xl text-textColor' />} 
+              icon={<FaLock className='text-xl text-red-400' />} 
               inputState={confirm_password}
               inputStateFunc={setConfirm_password} 
               type="password" 
@@ -120,14 +120,14 @@ const Login = () => {
             </div>
 
             <div className='flex items-center justify-between gap-16'>
-              <div className='w-24 h-[1px] rounded-md bg-white'></div>
-              <p className='text-white'>or</p>
-              <div className='w-24 h-[1px] rounded-md bg-white'></div>
+              <div className='w-24 h-[1px] rounded-md bg-black'></div>
+              <p className='text-black'>or</p>
+              <div className='w-24 h-[1px] rounded-md bg-black'></div>
             </div>
 
             <motion.div 
             {...buttonClick}
-            className='flex items-center justify-center px-20 py-2 bg-lightOverlay backdrop-blur-md cursor-pointer rounded-3xl gap-4'
+            className='flex items-center justify-center px-20 py-2 cursor-pointer rounded-3xl gap-4 border-2'
             onClick={loginWithGoogle}
             >
               <FcGoogle className='text-3xl'/>
