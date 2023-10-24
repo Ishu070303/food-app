@@ -13,16 +13,19 @@ app.use(express.json());
 //cross origin 
 const cors = require('cors');
 app.use(cors({ origin: true}));
-app.use(( req, res, next) => {
+app.use((req, res, next) => {
     res.set("Access-Control-Allow-Origin", "*");
     next();
 });
 
 //Firebase credentials
 admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
+    credential: admin.credential.cert(serviceAccountKey)
 });
 
 //ap endpoints 
+app.get("/", (req, res) => {
+  return res.send("Hello world");
+});
 
 exports.app = functions.https.onRequest(app);
