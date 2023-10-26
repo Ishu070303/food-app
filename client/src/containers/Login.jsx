@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 import { LoginInput } from '../components';
 import { LoginBg, Logo } from '../assets';
 import { FaEnvelope, FaLock, FcGoogle } from '../assets/icons';
 import { buttonClick } from '../animations';
-import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { app } from '../config/firebase.config';
 import { validateUserIdToken } from '../api';
 
@@ -17,6 +18,7 @@ const Login = () => {
 
   const firebaseAuth = getAuth(app);
   const provider = new GoogleAuthProvider();
+  const navigate = useNavigate();
 
   const loginWithGoogle = async () => {
     await signInWithPopup(firebaseAuth, provider).then(userCred => {
@@ -25,7 +27,8 @@ const Login = () => {
           cred.getIdToken().then(token => {
            validateUserIdToken(token).then((data) => {
             console.log(data);
-           })
+           });
+           navigate("/", { replace: true })
           })
         }
       })
@@ -37,23 +40,47 @@ const Login = () => {
       
     }else {
       if (password === confirm_password){
+        setUserEmail("");
+        setConfirm_password("");
+        setPassword("");
         await createUserWithEmailAndPassword(firebaseAuth, userEmail, password).then(usercred => {
           firebaseAuth.onAuthStateChanged((cred) => {
             if (cred) {
               cred.getIdToken().then((token) => {
                 validateUserIdToken(token).then((data) => {
                   console.log(data);
-                })
+                });
+
+                navigate("/", { replace: true })
               })
             }
           })
         })
-        console.log("equal")
       }else{
        // alert message
       }
     }
-  }
+  };
+
+  const signInWithEmailPass = async () => {
+    if(userEmail !==  "" && password !== ""){
+      await signInWithEmailAndPassword(firebaseAuth, userEmail, password).then(userCred => {
+        firebaseAuth.onAuthStateChanged((cred) => {
+          if (cred) {
+            cred.getIdToken().then((token) => {
+              validateUserIdToken(token).then((data) => {
+                console.log(data);
+              });
+              navigate("/", { replace: true });
+            })
+          }
+        })
+      })
+    }else {
+      // alert message
+    }
+  };
+
 
 
   return (
@@ -141,6 +168,7 @@ const Login = () => {
             ): (
             <motion.button {...buttonClick} 
             className='w-full px-4 py-2 rounded-md bg-blue-400 cursor-pointer text-white text-xl capitalize hover:bg-blue-500 transition-all duration-150'
+            onClick={signInWithEmailPass}
             >
               Sign In
             </motion.button>
