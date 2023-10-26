@@ -7,6 +7,7 @@ import { FaEnvelope, FaLock, FcGoogle } from '../assets/icons';
 import { buttonClick } from '../animations';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { app } from '../config/firebase.config';
+import { validateUserIdToken } from '../api';
 
 const Login = () => {
   const [ userEmail, setUserEmail ] = useState("");
@@ -22,7 +23,9 @@ const Login = () => {
       firebaseAuth.onAuthStateChanged(cred => {
         if(cred){
           cred.getIdToken().then(token => {
-            console.log(token);
+           validateUserIdToken(token).then(data => {
+            console.log(data);
+           })
           })
         }
       })

@@ -15,6 +15,8 @@ const cors = require('cors');
 app.use(cors({ origin: true}));
 app.use((req, res, next) => {
     res.set("Access-Control-Allow-Origin", "*");
+    res.set("Cross-Origin-Opener-Policy", "same-origin");
+    res.set("Cross-Origin-Embedder-Policy", "require-corp");
     next();
 });
 

@@ -14,9 +14,11 @@ router.get("/jwtVerification", async (req, res) => {
   try{
     const decodedValue = await admin.auth().verifyIdToken(token);
     if(!decodedValue){
-          return res.status(500).json({success: false,  msg: "Unauthorized access"});
+        return res
+        .status(500)
+        .json({success: false,  msg: "Unauthorized access"});
     }
-    res.status(200).json({ success: true, data: decodedValue});
+    return res.status(200).json({ success: true, data: decodedValue});
   }
 
   catch(err){
