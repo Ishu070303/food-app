@@ -62,6 +62,7 @@ const Login = () => {
     }
   };
 
+
   const signInWithEmailPass = async () => {
     if(userEmail !==  "" && password !== ""){
       await signInWithEmailAndPassword(firebaseAuth, userEmail, password).then(userCred => {
