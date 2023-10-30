@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,6 +9,8 @@ import { buttonClick } from '../animations';
 import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { app } from '../config/firebase.config';
 import { validateUserIdToken } from '../api';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUserDetails } from '../context/actions/userActions';
 
 const Login = () => {
   const [ userEmail, setUserEmail ] = useState("");
@@ -19,6 +21,15 @@ const Login = () => {
   const firebaseAuth = getAuth(app);
   const provider = new GoogleAuthProvider();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const user = useSelector(state => state.user);
+
+  useEffect(() => {
+    if(user){
+      navigate("/", { replace: true})
+    }
+  }, [user])
 
   const loginWithGoogle = async () => {
     await signInWithPopup(firebaseAuth, provider).then(userCred => {
@@ -26,7 +37,7 @@ const Login = () => {
         if(cred){
           cred.getIdToken().then(token => {
            validateUserIdToken(token).then((data) => {
-            console.log(data);
+            dispatch(setUserDetails(data));
            });
            navigate("/", { replace: true })
           })
@@ -48,7 +59,7 @@ const Login = () => {
             if (cred) {
               cred.getIdToken().then((token) => {
                 validateUserIdToken(token).then((data) => {
-                  console.log(data);
+                  dispatch(setUserDetails(data));
                 });
 
                 navigate("/", { replace: true })
@@ -70,7 +81,7 @@ const Login = () => {
           if (cred) {
             cred.getIdToken().then((token) => {
               validateUserIdToken(token).then((data) => {
-                console.log(data);
+                dispatch(setUserDetails(data));
               });
               navigate("/", { replace: true });
             })
