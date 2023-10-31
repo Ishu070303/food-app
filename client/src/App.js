@@ -9,6 +9,7 @@ import { validateUserIdToken } from './api';
 import { useDispatch } from 'react-redux';
 import { setUserDetails } from './context/actions/userActions';
 import { fadeInOut } from './animations';
+import { MainLoader, Alert } from './components';
 
 
 
@@ -39,14 +40,18 @@ const App = () => {
   return (
     <div className='w-screen min-h-screen h-auto flex flex-col items-center justify-center'>
       {isLoading && (
-        <motion.div {...fadeInOut} className='fixed z-50 inset-0 bg-lightOverlay backdrop-blur-md flex items-center justify-center w-full'>
-          Loading....
+        <motion.div 
+        {...fadeInOut} 
+        className='fixed z-50 inset-0 bg-lightOverlay backdrop-blur-md flex items-center justify-center w-full'>
+          <MainLoader />
         </motion.div>
       )}
       <Routes>
             <Route path='/*' element={<Main />} />
             <Route path='/login' element={<Login />} />
       </Routes>
+
+      <Alert />
     </div>
   )
 }
