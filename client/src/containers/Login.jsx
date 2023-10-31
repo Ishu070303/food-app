@@ -11,6 +11,7 @@ import { app } from '../config/firebase.config';
 import { validateUserIdToken } from '../api';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserDetails } from '../context/actions/userActions';
+import { alertInfo, alertWarning } from '../context/actions/alertActions';
 
 const Login = () => {
   const [ userEmail, setUserEmail ] = useState("");
@@ -23,7 +24,8 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const user = useSelector(state => state.user);
+  const user = useSelector((state) => state.user);
+  const alert = useSelector((state) => state.alert);
 
   useEffect(() => {
     if(user){
@@ -48,8 +50,9 @@ const Login = () => {
 
   const signUpWithEmailPass = async () => {
     if (userEmail === "" || password === "" || confirm_password === ""){
-      
-    }else {
+      dispatch(alertInfo("Required Fields should not be empty"));
+    }
+    else {
       if (password === confirm_password){
         setUserEmail("");
         setConfirm_password("");
@@ -68,7 +71,7 @@ const Login = () => {
           })
         })
       }else{
-       // alert message
+       dispatch(alertWarning("Password doesn't match"));
       }
     }
   };
@@ -90,6 +93,7 @@ const Login = () => {
       })
     }else {
       // alert message
+      dispatch(alertWarning("Password doesn't match"));
     }
   };
 

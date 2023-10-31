@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 
 import { Route, Routes } from 'react-router-dom';
 import { validateUserIdToken } from './api';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setUserDetails } from './context/actions/userActions';
 import { fadeInOut } from './animations';
 import { MainLoader, Alert } from './components';
@@ -19,6 +19,7 @@ const App = () => {
   const firebaseAuth = getAuth(app);
   const [ isLoading, setIsLoading ] = useState(false);
 
+  const alert = useSelector(state => state.alert);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -51,7 +52,7 @@ const App = () => {
             <Route path='/login' element={<Login />} />
       </Routes>
 
-      <Alert />
+      { alert?.type && <Alert type={alert?.type} message={alert?.message} />}
     </div>
   )
 }
