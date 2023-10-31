@@ -1,6 +1,8 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-import { Logo } from '../assets'
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+
+import { Logo } from '../assets';
+import { isActiveStyles, isNotActiveStyles } from '../utils/styles';
 
 const Header = () => {
   return (
@@ -12,14 +14,42 @@ const Header = () => {
 
         <nav className='flex items-center justify-center gap-8'>
             <ul className='hidden md:flex items-center justify-center gap-16'>
-                <NavLink to={"/"}>Home</NavLink>
-                <NavLink to={"/menu"}>Menu</NavLink>
-                <NavLink to={"/services"}>Services</NavLink>
-                <NavLink to={"/aboutus"}>About us</NavLink>
+                <NavLink 
+                className={({isActive}) => 
+                    isActive ? isActiveStyles : isNotActiveStyles
+                } 
+                to={"/"}>
+                    Home
+                </NavLink>
+
+                <NavLink 
+                className={({isActive}) => 
+                    isActive ? isActiveStyles : isNotActiveStyles
+                } 
+                to={"/menu"}>
+                    Menu
+                </NavLink>
+
+                <NavLink 
+                className={({isActive}) => 
+                    isActive ? isActiveStyles : isNotActiveStyles
+                } 
+                to={"/services"}>
+                    Services
+                </NavLink>
+
+                <NavLink 
+                className={({isActive}) => 
+                    isActive ? isActiveStyles : isNotActiveStyles
+                } 
+                to={"/aboutus"}>
+                    About us
+                </NavLink>
+
             </ul>
         </nav>
     </header>
   )
 }
 
-export default Header
+export default Header;
