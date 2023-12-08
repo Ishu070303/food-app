@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { statuses } from "../utils/styles";
 import { Spiner } from '../components';
 import { FaCloudUploadAlt, MdDelete } from "../assets/icons";
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../config/firebase.config";
 import { useDispatch, useSelector } from "react-redux";
 import { alertDanger, alertNULL, alertSuccess } from "../context/actions/alertActions";
@@ -52,8 +52,29 @@ const DBNewItems = () => {
   };
 
   const deleteImageFromFirebase = () => {
+    setIsLoading(true);
+    const deleteRef = ref(storage, imageDownloadURL);
 
+    deleteObject(deleteRef).then(() => {
+      setImageDownloadURL(null);
+      setIsLoading(false);
+      dispatch(alertSuccess("Images removed from the cloud"));
+      setTimeout(() => {
+        dispatch(alertNULL());
+      }, 3000);
+    })
   };
+
+  const submitNewData = () => {
+    const data = {
+      product_name: itemName,
+      product_category: category,
+      product_price: price,
+      imageURL: imageDownloadURL,
+    };
+
+    console.log(data);
+  }
 
   return (
     <div className="flex items-center justify-center flex-col pt-6 px-24 w-full">
@@ -93,7 +114,29 @@ const DBNewItems = () => {
           (
             <div className="w-full h-full flex flex-col items-center justify-evenly px-24">
               <Spiner />
-              {progress}
+              {Math.round(progress > 0) && (
+                <div className=" w-full flex flex-col items-center justify-center gap-2">
+                  <div className="flex justify-between w-full">
+                    <span className=" text-base font-medium text-textColor">
+                      Progress
+                    </span>
+                    <span className="text-sm font-medium text-textColor">
+                      {Math.round(progress) > 0 && (
+                        <>{`${Math.round(progress)}%`}</>
+                      )}
+                    </span>
+                  </div>
+
+                  <div className="w-full bg-gray-200 rounded-full h-2.5">
+                    <div
+                    className="bg-red-600 h-2.5 rounded-full transition-all duration-300 ease-in-out"
+                    style={{
+                      width: `${Math.round(progress)}%`
+                    }}
+                    ></div>
+                  </div>
+                </div>
+              )}
             </div>
           ) : 
             <>
@@ -139,7 +182,10 @@ const DBNewItems = () => {
             </>
           }
         </div>
-
+        <motion.button onClick={submitNewData} {...buttonClick} className=" w-9/12 py-2 rounded-md bg-red-400 text-primary
+        hover:bg-red-500 cursor-pointer">
+          Save
+        </motion.button>
       </div>
     </div>
   );
