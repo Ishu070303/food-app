@@ -13,3 +13,4 @@ export { default as DBItems } from './DBItems';
 export { default as DBNewItems } from './DBNewItems';
 export { default as DBUsers } from './DBUsers';
 export { default as DataTable } from './DataTable';
+export { default as Spiner } from './Spiner';
