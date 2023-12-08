@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
+import { DataTable } from ".";
 
 const DBItems = () => {
-  return (
-    <div>DBItems</div>
-  )
-}
 
-export default DBItems
+  return (
+    <div className="flex items-center justify-center gap-4 pt-6 w-full">
+      <DataTable  />
+    </div>
+  );
+};
+
+export default DBItems;
