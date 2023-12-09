@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { alertDanger, alertNULL, alertSuccess } from "../context/actions/alertActions";
 import { buttonClick } from "../animations";
 import { motion } from "framer-motion";
+import { addNewProduct } from "../api";
 
 const DBNewItems = () => {
   const [itemName, setItemName] = useState("");
@@ -73,7 +74,17 @@ const DBNewItems = () => {
       imageURL: imageDownloadURL,
     };
 
-    console.log(data);
+    addNewProduct(data).then((res) => {
+      console.log(res);
+      dispatch(alertSuccess("New Item Added"))
+      setTimeout(() => {
+        dispatch(alertNULL());
+      }, 3000);
+      setImageDownloadURL(null);
+      setItemName("");
+      setPrice("");
+      setCategory(null);
+    })
   }
 
   return (
