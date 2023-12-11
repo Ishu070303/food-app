@@ -26,4 +26,15 @@ export const addNewProduct = async (data) => {
     catch(err){
         return err;
     }
+};
+
+//get all the products
+export const getAllProducts = async () => {
+    try{
+        const res = await axios.post(`${baseURL}/api/products/all`);
+        return res.data.data;
+    }
+    catch(err) {
+        return null;
+    }
 }

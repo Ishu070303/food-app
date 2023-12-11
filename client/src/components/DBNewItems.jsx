@@ -8,7 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { alertDanger, alertNULL, alertSuccess } from "../context/actions/alertActions";
 import { buttonClick } from "../animations";
 import { motion } from "framer-motion";
-import { addNewProduct } from "../api";
+import { addNewProduct, getAllProducts } from "../api";
+import { setAllProducts } from "../context/actions/productActions";
 
 const DBNewItems = () => {
   const [itemName, setItemName] = useState("");
@@ -84,8 +85,12 @@ const DBNewItems = () => {
       setItemName("");
       setPrice("");
       setCategory(null);
-    })
-  }
+    });
+
+    getAllProducts().then((data) => {
+      dispatch(setAllProducts(data));
+    });
+  };
 
   return (
     <div className="flex items-center justify-center flex-col pt-6 px-24 w-full">
