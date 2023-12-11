@@ -20,7 +20,7 @@ export const validateUserIdToken = async (token) => {
 //add new product
 export const addNewProduct = async (data) => {
     try{
-        const res = axios.post(`${baseURL}/api/products/create`, {...data});
+        const res = await axios.post(`${baseURL}/api/products/create`, {...data});
         return res.data.data;
     }
     catch(err){

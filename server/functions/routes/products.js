@@ -15,6 +15,7 @@ router.post("/create", async(req, res) => {
         };
 
         const response = await db.collection("products").doc(`/${id}/`).set(data);
+        console.log(response)
         return res.status(200).send({ success: true, data: response });
     }
     catch(err){

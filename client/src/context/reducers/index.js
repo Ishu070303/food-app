@@ -5,7 +5,7 @@ import alertReducer from './alertReducer';
 
 const myReducers = combineReducers({
     user: userReducer,
-    alert: alertReducer
+    alert: alertReducer,
 });
 
 export default myReducers;
