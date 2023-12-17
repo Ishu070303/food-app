@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { getAllProducts } from '../api';
 import { setAllProducts } from '../context/actions/productActions';
 
@@ -21,4 +21,4 @@ const DBHome = () => {
   )
 }
 
-export default DBHome
+export default DBHome;
