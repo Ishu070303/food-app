@@ -31,7 +31,7 @@ const DBItems = () => {
           title: "Price",
           field: "product_price",
           render: (rowData) => (
-            <p className="text-2xl font-semibold text-textColor">
+            <p className="text-xl font-semibold text-textColor flex items-center justify-center gap-2">
               <HiCurrencyRupee className="text-red-400" />
               {parseFloat(rowData.product_price).toFixed(2)}
             </p>
@@ -40,6 +40,26 @@ const DBItems = () => {
       ]}
 
       data={products}
+      title="List of Products"
+      actions={[
+        {
+          icon: "edit",
+          tooltip: "Edit Data",
+          onClick: (event, rowData) => {
+            alert("You want to edit "+ rowData.productId)
+          }
+        }, 
+
+        {
+          icon: "delete",
+          tooltip: "Delete Data",
+          onClick: (event, rowData) => {
+            if(window.confirm("Are you sure, you want to perform this action? ")){
+              
+            }
+          },
+        },
+      ]}
       />
     </div>
   );
