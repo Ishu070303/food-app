@@ -1,11 +1,16 @@
 import React from "react";
 import { DataTable } from "../components";
 import { HiCurrencyRupee } from "../assets/icons/index";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteAProduct, getAllProducts } from '../api/index';
+import { setAllProducts } from "../context/actions/productActions";
+import { alertNULL, alertSuccess } from "../context/actions/alertActions";
 
 const DBItems = () => {
 
-  const products = useSelector((state) => state.products)
+  const products = useSelector((state) => state.products);
+  const dispatch = useDispatch();
+
   return (
     <div className="flex items-center justify-center gap-4 pt-6 w-full">
       <DataTable
@@ -55,7 +60,15 @@ const DBItems = () => {
           tooltip: "Delete Data",
           onClick: (event, rowData) => {
             if(window.confirm("Are you sure, you want to perform this action? ")){
-              
+              deleteAProduct(rowData.productId).then(res => {
+                dispatch(alertSuccess("Product Deleted!"));
+                setInterval(() => {
+                  dispatch(alertNULL());
+                }, 3000);
+                getAllProducts().then((data) => {
+                  dispatch(setAllProducts(data));
+                })
+              })
             }
           },
         },
